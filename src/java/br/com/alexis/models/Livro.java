@@ -20,9 +20,8 @@ import javax.persistence.Table;
 @Table(name = "alexis_livro")
 public class Livro implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private Integer numPaginas;
