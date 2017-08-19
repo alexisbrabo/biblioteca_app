@@ -4,7 +4,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Biblioteca</title>
+        <title>BibliotecaApp</title>
     </h:head>
     <h:body>
         <b:panelGrid columns="1">
@@ -23,68 +23,40 @@
                     <b:navCommandLink value="Sair" action="#{indexView.sair()}" />
                 </b:navbarLinks>
 
+                <h:panelGroup id="livro">
+                    <b:well rendered="#{indexView.renderCadastroLivro}">
+
+
+                        <h:panelGrid columns="1">
+                            <div class="form-group">
+                                <b:inputText label="Nome:" value="#{indexView.livro.nome}" labelStyle="width:80px;"/>
+                            </div>
+                            <div class="form-group">
+                                <b:inputText label="Páginas:" value="#{indexView.livro.numPaginas}" labelStyle="width:80px;" mask="9999"/>
+                            </div>
+                            <div class="form-group">
+                                <b:inputText label="Editora:" value="#{indexView.livro.editora}" labelStyle="width:80px;"/>
+                            </div>
+
+                            <br/>
+                            <h:panelGroup>
+                                <div class="btn-group">
+                                    <b:commandButton look="primary" value="Ok" actionListener="#{indexView.confirmarLivro()}" update="grow"/>
+                                    <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro"/>
+                                    <b:growl id="grow" globalOnly="true" placementFrom="bottom"
+                                             show-detail="true" show-summary="false" allowDismiss="true"
+                                             delay="100" escape="true" />
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+
+                    </b:well>
+                </h:panelGroup>
+
             </b:form>
         </b:panelGrid>
 
-        <h:panelGroup id="livro">
-            <b:well rendered="#{indexView.renderCadastroLivro}">
-                <b:form inline="true">
-
-                    <b:growl id="growlMsg" globalOnly="true" placementFrom="top"
-                             show-detail="true" show-summary="false" allowDismiss="true"
-                             delay="100" escape="true" />
-
-                    <h:panelGrid columns="1">
-                        <div class="form-group">
-                            <b:inputText label="Nome:" value="#{indexView.livro.nome}" labelStyle="width:80px;"/>
-                        </div>
-                        <div class="form-group">
-                            <b:inputText label="Páginas:" value="#{indexView.livro.numPaginas}" labelStyle="width:80px;" mask="9999"/>
-                        </div>
-                        <div class="form-group">
-                            <b:inputText label="Editora:" value="#{indexView.livro.editora}" labelStyle="width:80px;"/>
-                        </div>
-
-                        <br/>
-                        <h:panelGroup>
-                            <div class="btn-group">
-                                <b:commandButton look="primary" value="Ok" actionListener="#{indexView.message()}" update="@form"/>
-                                <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro"/>
-                            </div>
-                        </h:panelGroup>
-                    </h:panelGrid>
-
-                </b:form>
-            </b:well>
-        </h:panelGroup>
-
-        <h:panelGroup id="autor">
-            <b:well rendered="#{indexView.renderCadastroAutor}">
-                <b:form inline="true">
-
-                    <b:growl id="growlMsg" globalOnly="true" placementFrom="top"
-                             show-detail="true" show-summary="false" allowDismiss="true"
-                             delay="100" escape="true" />
-
-                    <h:panelGrid columns="1">
-                        <div class="form-group">
-                            <b:inputText label="Nome:" labelStyle="width:80px;"/>
-                        </div>
-                        <div class="form-group">
-                            <b:inputText label="Sobrenome" labelStyle="width:80px;" mask="9999"/>
-                        </div>
-                        <br/>
-                        <h:panelGroup>
-                            <div class="btn-group">
-                                <b:commandButton look="primary" value="Ok" actionListener="#{indexView.message()}" update="@form"/>
-                                <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="teste"/>
-                            </div>
-                        </h:panelGroup>
-                    </h:panelGrid>
-
-                </b:form>
-            </b:well>
-        </h:panelGroup>
 
     </h:body>
 </html>

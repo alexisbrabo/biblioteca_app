@@ -5,9 +5,12 @@
  */
 package br.com.alexis.views;
 
+import br.com.alexis.beans.livroBean;
 import br.com.alexis.models.Livro;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import net.bootsfaces.utils.FacesMessages;
 
 /**
@@ -15,8 +18,10 @@ import net.bootsfaces.utils.FacesMessages;
  * @author alexisbrabo
  */
 @ManagedBean
+@ViewScoped
 public class indexView implements Serializable {
-
+    @EJB
+    livroBean livroBean;
     private boolean renderCadastroLivro;
     private boolean renderCadastroAutor;
     private Livro livro;
@@ -39,7 +44,7 @@ public class indexView implements Serializable {
     }
 
     public void confirmarLivro() {
-
+        livroBean.salvar(livro);
     }
 
     /**
