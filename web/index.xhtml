@@ -7,23 +7,25 @@
         <title>BibliotecaApp</title>
     </h:head>
     <h:body> 
+        <b:growl id="grow" globalOnly="true" placementFrom="tp"
+                 show-detail="true" show-summary="false" allowDismiss="true"
+                 delay="100" escape="true" />
         <b:form>
             <b:panelGrid columns="1">
 
                 <b:navbarLinks>
                     <b:dropMenu value="Cadastro">
-                        <b:navCommandLink value="Livro" action="#{indexView.renderizarCadastroLivro()}" update="livro"/>
+                        <b:navCommandLink value="Livro" action="#{indexView.renderizarCadastroLivro()}" update="@form"/>
                         <b:navLink value="Autor" href="#"></b:navLink>
-                        <b:navLink value="Usuário" href="#"></b:navLink>
+                        <b:navCommandLink value="Usuario" action="#{indexView.renderizarCadastroUsuario()}" update="@form"/>
                     </b:dropMenu>
                     <b:dropMenu value="Listagens">
-                        <b:navCommandLink value="Livro" action="#{indexView.renderizarCadastroLivro()}" update="livro"/>
+                        <b:navCommandLink value="Livro" action="#{indexView.renderizarListaLivro()}" update="@form"/>
                         <b:navLink value="Autor" href="#"></b:navLink>
                         <b:navLink value="Usuário" href="#"></b:navLink>
                     </b:dropMenu>
-                    <b:navCommandLink value="Sair" action="#{indexView.sair()}" />
+                    <b:navCommandLink value="Sair" action="#{indexView.iniciar()}" />
                 </b:navbarLinks>
-
 
             </b:panelGrid>
 
@@ -42,20 +44,55 @@
                         <div class="form-group">
                             <b:inputText label="Editora:" value="#{indexView.livro.editora}" labelStyle="width:80px;"/>
                         </div>
-
                         <br/>
                         <h:panelGroup>
                             <div class="btn-group">
                                 <b:commandButton look="primary" value="Ok" actionListener="#{indexView.confirmarLivro()}" update="grow"/>
-                                <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro"/>
-                                <b:growl id="grow" globalOnly="true" placementFrom="bottom"
-                                         show-detail="true" show-summary="false" allowDismiss="true"
-                                         delay="100" escape="true" />
+                                <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.iniciar()}" update="livro"/>
                             </div>
                         </h:panelGroup>
 
                     </h:panelGrid>
 
+
+                </b:well>
+            </h:panelGroup>
+
+            <h:panelGroup id="usuario">
+                <b:well rendered="#{indexView.renderCadastroUsuario}">
+
+
+                    <h:panelGrid columns="1">
+
+                        <div class="form-group">
+                            <b:inputText label="Login:" value="#{indexView.usuario.nome}" labelStyle="width:80px;"/>
+                        </div>
+                        <div class="form-group">
+                            <b:inputText label="Senha:" value="#{indexView.usuario.senha}" labelStyle="width:80px;"/>
+                        </div>
+                        <br/>
+                        <h:panelGroup>
+                            <div class="btn-group">
+                                <b:commandButton look="primary" value="Ok" actionListener="#{indexView.confirmarUsuario()}" update="grow"/>
+                                <b:commandButton look="danger" value="Cancelar" actionListener="#{indexView.iniciar()}" update="livro"/>
+                            </div>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+
+
+                </b:well>
+            </h:panelGroup>
+
+            <h:panelGroup id="listaLivro">
+                <b:well rendered="#{indexView.renderListaLivro}">
+
+                    <b:dataTable value="#{indexView.listaLivro}"
+                                 var="livro" customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+                        <b:dataTableColumn value="#{livro.nome}" />
+                        <b:dataTableColumn value="#{livro.editora}" />
+                        <b:dataTableColumn value="#{livro.numPaginas}" />
+                    </b:dataTable>
 
                 </b:well>
             </h:panelGroup>
