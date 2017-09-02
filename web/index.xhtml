@@ -8,7 +8,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="top">
-        
+
     </ui:define>
 
     <ui:define name="center">
@@ -22,7 +22,7 @@
             </p:submenu>
 
             <p:submenu label="Listagens" icon="ui-icon-pencil">
-                <p:menuitem value="Livro" url="#" icon="ui-icon-arrowreturnthick-1-w" action="#{indexView.renderizarCadastroLivro()}" update="livro" />
+                <p:menuitem value="Livro" action="#{indexView.renderizarListaLivro()}" update="livro" />
                 <p:menuitem value="Usuário" url="#" icon="ui-icon-arrowreturnthick-1-e" />
             </p:submenu>
 
@@ -33,35 +33,64 @@
                 <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
             </f:facet>
         </p:menubar>
-        
+
         <h:panelGroup id="livro">
-            <p:panel rendered="#{indexView.renderCadastroLivro}">
-
-
+            <h:panelGroup rendered="#{indexView.renderCadastroLivro}">
                 <h:panelGrid columns="2">
                     <h:outputText value="Nome:"/>
-                    <p:inputText value="#{indexView.livro.nome}"/>
+                    <p:inputText value="#{indexView.livro.nome}" required="true" label="Nome"/>
                     <h:outputText value="Páginas:"/>
-                    <p:inputText value="#{indexView.livro.numPaginas}"/>
+                    <p:inputText value="#{indexView.livro.numPaginas}" required="true" label="Número de Páginas"/>
                     <h:outputText value="Editora:"/>
-                    <p:inputText value="#{indexView.livro.editora}"/>
+                    <p:inputText value="#{indexView.livro.editora}" required="true" label="Editora"/>
 
                     <br/>
                     <h:panelGroup>
 
-                        <p:commandButton value="Ok" actionListener="#{indexView.confirmarLivro()}" update="messages"/>
+                        <p:commandButton value="Ok" actionListener="#{indexView.confirmarLivro()}" update="messages, livro"/>
                         <p:commandButton value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro"/>
                     </h:panelGroup>
 
                 </h:panelGrid>
+            </h:panelGroup>
 
+            <h:panelGroup rendered="#{indexView.renderListaLivro}">
+                <p:dataTable var="livro" value="#{indexView.listaLivro}" widgetVar="livros" paginator="true" emptyMessage="Sem Registros" 
+                             filteredValue="#{indexView.listaLivroFiltrados}">
+                    
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Procure em todos os campos:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('livros').filter()" style="width:150px" placeholder="Digite Aqui"/>
+                        </p:outputPanel>
+                    </f:facet>
+                    
+                    <p:column headerText="Id" filterBy="#{livro.id}">
+                        <h:outputText value="#{livro.id}" />
+                    </p:column>
 
-            </p:panel>
+                    <p:column headerText="Nome" filterBy="#{livro.nome}">
+                        <h:outputText value="#{livro.nome}" />
+                    </p:column>
+
+                    <p:column headerText="Editora" filterBy="#{livro.editora}">
+                        <h:outputText value="#{livro.editora}" />
+                    </p:column>
+
+                    <p:column headerText="Num. Páginas" filterBy="#{livro.numPaginas}">
+                        <h:outputText value="#{livro.numPaginas}" />
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
         </h:panelGroup>
     </ui:define>
 
+    <ui:define name="content">
+
+    </ui:define>
+
     <ui:define name="bottom">
-       
+
     </ui:define>
 
 </ui:composition>
