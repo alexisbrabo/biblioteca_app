@@ -7,11 +7,13 @@ package br.com.alexis.views;
 
 import br.com.alexis.beans.livroBean;
 import br.com.alexis.models.Livro;
+import br.com.alexis.padrao.View;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import net.bootsfaces.utils.FacesMessages;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -19,7 +21,7 @@ import net.bootsfaces.utils.FacesMessages;
  */
 @ManagedBean
 @ViewScoped
-public class indexView implements Serializable {
+public class indexView extends View implements Serializable {
     @EJB
     livroBean livroBean;
     private boolean renderCadastroLivro;
@@ -27,9 +29,10 @@ public class indexView implements Serializable {
     private Livro livro;
 
     public void message() {
-        FacesMessages.info("TESTE");
+        addMessageInfo("Success", "Data saved");
     }
-
+    
+   
     public void renderizarCadastroLivro() {
         livro = new Livro();
         renderCadastroLivro = true;

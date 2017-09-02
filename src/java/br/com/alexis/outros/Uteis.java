@@ -10,7 +10,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
-import net.bootsfaces.utils.FacesMessages;
 
 /**
  *
@@ -40,12 +39,10 @@ public class Uteis {
     //MOSTRAR MENSAGEM
     public static void MensagemAtencao(String mensagem) {
 
-        FacesMessages.warning(mensagem);
     }
 
     //MOSTRAR MENSAGEM
     public static void MensagemInfo(String mensagem) {
 
-        FacesMessages.info(mensagem);
     }
 }
