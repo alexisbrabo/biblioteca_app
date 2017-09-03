@@ -22,7 +22,7 @@
             </p:submenu>
 
             <p:submenu label="Listagens" icon="ui-icon-pencil">
-                <p:menuitem value="Livro" action="#{indexView.renderizarListaLivro()}" update="livro" />
+                <p:menuitem value="Livro" action="#{indexView.renderizarListaLivro()}" update="livro" process="@this"/>
                 <p:menuitem value="Usuário" url="#" icon="ui-icon-arrowreturnthick-1-e" />
             </p:submenu>
 
@@ -48,7 +48,7 @@
                     <h:panelGroup>
 
                         <p:commandButton value="Ok" actionListener="#{indexView.confirmarLivro()}" update="messages, livro"/>
-                        <p:commandButton value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro"/>
+                        <p:commandButton value="Cancelar" actionListener="#{indexView.desRenderizarCadastroLivro()}" update="livro" process="@this"/>
                     </h:panelGroup>
 
                 </h:panelGrid>
@@ -56,7 +56,7 @@
 
             <h:panelGroup rendered="#{indexView.renderListaLivro}">
                 <p:dataTable var="livro" value="#{indexView.listaLivro}" widgetVar="livros" paginator="true" emptyMessage="Sem Registros" 
-                             filteredValue="#{indexView.listaLivroFiltrados}">
+                             filteredValue="#{indexView.listaLivroFiltrados}" rows="10">
                     
                     <f:facet name="header">
                         <p:outputPanel>

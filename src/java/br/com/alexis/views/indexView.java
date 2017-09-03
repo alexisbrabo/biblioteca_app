@@ -30,6 +30,7 @@ public class indexView extends View implements Serializable {
     private Livro livro;
     private List<Livro> listaLivro;
     private List<Livro> listaLivroFiltrados;
+    private String url;
     
     public void iniciar(){
         renderCadastroAutor = false;
@@ -153,6 +154,20 @@ public class indexView extends View implements Serializable {
      */
     public void setListaLivroFiltrados(List<Livro> listaLivroFiltrados) {
         this.listaLivroFiltrados = listaLivroFiltrados;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }
