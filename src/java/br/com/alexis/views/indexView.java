@@ -22,79 +22,34 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class indexView extends View implements Serializable {
+
     @EJB
     LivroBean livroBean;
-    private boolean renderCadastroLivro;
-    private boolean renderListaLivro;
-    private boolean renderCadastroAutor;
     private Livro livro;
     private List<Livro> listaLivro;
     private List<Livro> listaLivroFiltrados;
     private String url;
-    
-    public void iniciar(){
-        renderCadastroAutor = false;
-        renderCadastroLivro = false;
-        renderListaLivro = false;
+
+    public void iniciar() {
+
     }
 
     public void message() {
         addMessageInfo("Success", "Data saved");
     }
-    
-   
+
     public void renderizarCadastroLivro() {
-        iniciar();
         livro = new Livro();
-        renderCadastroLivro = true;
     }
-    
+
     public void renderizarListaLivro() {
-        iniciar();
         listaLivro = livroBean.findAll();
-        renderListaLivro = true;
-    }
-
-    public void desRenderizarCadastroLivro() {
-        renderCadastroLivro = false;
-    }
-
-    public void sair() {
-        renderCadastroLivro = false;
     }
 
     public void confirmarLivro() {
         livroBean.salvar(livro);
         livro = new Livro();
         addMessageInfo("Registro salvo com sucesso", "Registro salvo com sucesso");
-    }
-
-    /**
-     * @return the renderCadastroLivro
-     */
-    public boolean isRenderCadastroLivro() {
-        return renderCadastroLivro;
-    }
-
-    /**
-     * @param renderCadastroLivro the renderCadastroLivro to set
-     */
-    public void setRenderCadastroLivro(boolean renderCadastroLivro) {
-        this.renderCadastroLivro = renderCadastroLivro;
-    }
-
-    /**
-     * @return the renderCadastroAutor
-     */
-    public boolean isRenderCadastroAutor() {
-        return renderCadastroAutor;
-    }
-
-    /**
-     * @param renderCadastroAutor the renderCadastroAutor to set
-     */
-    public void setRenderCadastroAutor(boolean renderCadastroAutor) {
-        this.renderCadastroAutor = renderCadastroAutor;
     }
 
     /**
@@ -112,24 +67,10 @@ public class indexView extends View implements Serializable {
     }
 
     /**
-     * @return the renderListaLivro
-     */
-    public boolean isRenderListaLivro() {
-        return renderListaLivro;
-    }
-
-    /**
-     * @param renderListaLivro the renderListaLivro to set
-     */
-    public void setRenderListaLivro(boolean renderListaLivro) {
-        this.renderListaLivro = renderListaLivro;
-    }
-
-    /**
      * @return the listaLivro
      */
     public List<Livro> getListaLivro() {
-        if (listaLivro == null){
+        if (listaLivro == null) {
             listaLivro = new ArrayList<>();
         }
         return listaLivro;
