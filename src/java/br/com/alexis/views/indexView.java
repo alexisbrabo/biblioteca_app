@@ -43,6 +43,11 @@ public class indexView extends View implements Serializable {
         listaLivro = livroBean.findAll();
         renderListaLivro = true;
     }
+    
+    public void renderizarCadastroAutor() {
+        listaLivro = livroBean.findAll();
+        renderListaLivro = true;
+    }
 
     public void adicionarLivro() {
         livro = new Livro();
