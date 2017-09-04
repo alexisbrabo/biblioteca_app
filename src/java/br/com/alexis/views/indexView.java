@@ -22,7 +22,7 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class indexView extends View implements Serializable {
-
+    
     @EJB
     LivroBean livroBean;
     private Livro livro;
@@ -30,15 +30,15 @@ public class indexView extends View implements Serializable {
     private List<Livro> listaLivroFiltrados;
     private String url;
     private boolean renderListaLivro;
-
+    
     public void iniciar() {
-
+        
     }
-
+    
     public void message() {
         addMessageInfo("Success", "Data saved");
     }
-
+    
     public void renderizarCadastroLivro() {
         listaLivro = livroBean.findAll();
         renderListaLivro = true;
@@ -48,17 +48,23 @@ public class indexView extends View implements Serializable {
         listaLivro = livroBean.findAll();
         renderListaLivro = true;
     }
-
+    
     public void adicionarLivro() {
         livro = new Livro();
         renderListaLivro = false;
     }
-
+    
     public void confirmarLivro() {
-        livroBean.salvar(livro);
+        if (livro.getId() == null) {
+            livroBean.salvar(livro);
+            addMessageInfo("Registro salvo com sucesso", "Registro salvo com sucesso");
+        } else {
+            livroBean.update(livro);
+            addMessageInfo("Registro atualizado com sucesso", "Registro atualizado com sucesso");
+        }
         livro = new Livro();
         renderizarCadastroLivro();
-        addMessageInfo("Registro salvo com sucesso", "Registro salvo com sucesso");
+        
     }
 
     /**
@@ -133,5 +139,5 @@ public class indexView extends View implements Serializable {
     public void setRenderListaLivro(boolean renderListaLivro) {
         this.renderListaLivro = renderListaLivro;
     }
-
+    
 }

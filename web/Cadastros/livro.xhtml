@@ -48,6 +48,18 @@
                 <p:column headerText="Num. Páginas" filterBy="#{livro.numPaginas}">
                     <h:outputText value="#{livro.numPaginas}" />
                 </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":geral:pnlGeralLivro" icon="fa fa-edit" title="Editar">
+                        <f:setPropertyActionListener value="#{livro}" target="#{indexView.livro}" />
+                        <f:setPropertyActionListener value="false" target="#{indexView.renderListaLivro}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":geral:pnlGeralLivro" icon="fa fa-trash-o" title="Excluir Registro">
+                        <f:setPropertyActionListener value="#{livro}" target="#{indexView.livro}" />
+                        <f:setPropertyActionListener value="false" target="#{indexView.renderListaLivro}" />
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
         </h:panelGroup>
 
