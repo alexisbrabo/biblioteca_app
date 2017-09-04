@@ -29,6 +29,7 @@ public class indexView extends View implements Serializable {
     private List<Livro> listaLivro;
     private List<Livro> listaLivroFiltrados;
     private String url;
+    private boolean renderListaLivro;
 
     public void iniciar() {
 
@@ -39,16 +40,19 @@ public class indexView extends View implements Serializable {
     }
 
     public void renderizarCadastroLivro() {
-        livro = new Livro();
+        listaLivro = livroBean.findAll();
+        renderListaLivro = true;
     }
 
-    public void renderizarListaLivro() {
-        listaLivro = livroBean.findAll();
+    public void adicionarLivro() {
+        livro = new Livro();
+        renderListaLivro = false;
     }
 
     public void confirmarLivro() {
         livroBean.salvar(livro);
         livro = new Livro();
+        renderizarCadastroLivro();
         addMessageInfo("Registro salvo com sucesso", "Registro salvo com sucesso");
     }
 
@@ -109,6 +113,20 @@ public class indexView extends View implements Serializable {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * @return the renderListaLivro
+     */
+    public boolean isRenderListaLivro() {
+        return renderListaLivro;
+    }
+
+    /**
+     * @param renderListaLivro the renderListaLivro to set
+     */
+    public void setRenderListaLivro(boolean renderListaLivro) {
+        this.renderListaLivro = renderListaLivro;
     }
 
 }

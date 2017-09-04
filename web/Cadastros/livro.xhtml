@@ -2,24 +2,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:panelGroup id="livro">
-        <h:panelGrid columns="2">
-            <h:outputText value="Nome:"/>
-            <p:inputText value="#{indexView.livro.nome}" required="true" label="Nome"/>
-            <h:outputText value="Páginas:"/>
-            <p:inputText value="#{indexView.livro.numPaginas}" required="true" label="Número de Páginas"/>
-            <h:outputText value="Editora:"/>
-            <p:inputText value="#{indexView.livro.editora}" required="true" label="Editora"/>
+    <h:panelGroup id="pnlGeralLivro">
+        <h:panelGroup id="listaLivroPnl" rendered="#{indexView.renderListaLivro}">
+            <p:dataTable id="listaLivro" var="livro" value="#{indexView.listaLivro}" widgetVar="livros" paginator="true" emptyMessage="Sem Registros" 
+                         filteredValue="#{indexView.listaLivroFiltrados}" rows="10">
 
-            <br/>
-            <h:panelGroup>
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Adicionar" action="#{indexView.adicionarLivro()}" update=":geral:pnlGeralLivro"/> 
 
-                <p:commandButton value="Ok" action="#{indexView.confirmarLivro()}" update="messages, livro"/>
-                <p:commandButton value="Cancelar" process="@this"/>
-            </h:panelGroup>
+                        <p:spacer width="5px"/>
 
-        </h:panelGrid>
+                        <h:outputText value="Procure em todos os campos " />
+                        <p:inputText id="globalFilter" onkeyup="PF('livros').filter()" style="width:150px" placeholder="Digite Aqui"/>
+
+                        <p:spacer width="5px"/>
+
+                        <p:commandButton icon="fa fa-file-excel-o" ajax="false"> 
+                            <p:dataExporter type="xls" target="listaLivro" fileName="livro"/>
+                        </p:commandButton>
+
+                        <p:commandButton icon="fa fa-file-pdf-o" ajax="false">
+                            <p:dataExporter type="pdf" target="listaLivro" fileName="livro"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+
+
+                </f:facet>
+
+                <p:column headerText="Id" filterBy="#{livro.id}">
+                    <h:outputText value="#{livro.id}" />
+                </p:column>
+
+                <p:column headerText="Nome" filterBy="#{livro.nome}">
+                    <h:outputText value="#{livro.nome}" />
+                </p:column>
+
+                <p:column headerText="Editora" filterBy="#{livro.editora}">
+                    <h:outputText value="#{livro.editora}" />
+                </p:column>
+
+                <p:column headerText="Num. Páginas" filterBy="#{livro.numPaginas}">
+                    <h:outputText value="#{livro.numPaginas}" />
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+
+        <h:panelGroup id="livro" rendered="#{!indexView.renderListaLivro}">
+            <p:panelGrid columns="2" styleClass="ui-noborder">
+                <h:outputText value="Nome:"/>
+                <p:inputText value="#{indexView.livro.nome}" required="true" label="Nome"/>
+                <h:outputText value="Páginas:"/>
+                <p:inputText value="#{indexView.livro.numPaginas}" required="true" label="Número de Páginas"/>
+                <h:outputText value="Editora:"/>
+                <p:inputText value="#{indexView.livro.editora}" required="true" label="Editora"/>
+
+                <br/>
+                <h:panelGroup>
+
+                    <p:commandButton value="Ok" action="#{indexView.confirmarLivro()}" update="messages, :geral:pnlGeralLivro"/>
+                    <p:commandButton value="Cancelar" process="@this" update=":geral:pnlGeralLivro">
+                        <f:setPropertyActionListener value="true" target="#{indexView.renderListaLivro}"/>
+                    </p:commandButton>
+                </h:panelGroup>
+
+            </p:panelGrid>
+        </h:panelGroup>
     </h:panelGroup>
 </html>
