@@ -19,7 +19,9 @@
                 <p:menuitem value="Livro" icon="fa fa-book" update="pagina" action="#{indexView.renderizarCadastroLivro()}" process="@this">
                     <f:setPropertyActionListener value="../Cadastros/livro.xhtml" target="#{indexView.url}"/>
                 </p:menuitem>
-                <p:menuitem value="Autor" action="#{indexView.message()}" update="messages"/>
+                <p:menuitem value="Autor" action="#{indexView.renderizarCadastroAutor()}" process="@this">
+                    <f:setPropertyActionListener value="../Cadastros/autor.xhtml" target="#{indexView.url}"/>
+                </p:menuitem>
             </p:submenu>
 
             <p:menuitem value="Sair" icon="ui-icon-close" />
