@@ -6,7 +6,9 @@
 package br.com.alexis.views;
 
 import br.com.alexis.beans.LivroBean;
+import br.com.alexis.beans.UsuarioBean;
 import br.com.alexis.models.Livro;
+import br.com.alexis.models.Usuario;
 import br.com.alexis.padrao.View;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,11 +27,15 @@ public class indexView extends View implements Serializable {
     
     @EJB
     LivroBean livroBean;
+    @EJB
+    UsuarioBean usuarioBean;
     private Livro livro;
     private List<Livro> listaLivro;
+    private List<Usuario> listaUsuario;
     private List<Livro> listaLivroFiltrados;
     private String url;
     private boolean renderListaLivro;
+    private boolean renderListaUsuario;
     private boolean renderListaAutor;
     
     public void iniciar() {
@@ -47,6 +53,11 @@ public class indexView extends View implements Serializable {
     
     public void renderizarCadastroAutor() {
         listaLivro = livroBean.findAll();
+        renderListaLivro = true;
+    }
+    
+    public void renderizarCadastroUsuario() {
+        listaUsuario = usuarioBean.findAll();
         renderListaLivro = true;
     }
     
@@ -153,6 +164,34 @@ public class indexView extends View implements Serializable {
      */
     public void setRenderListaAutor(boolean renderListaAutor) {
         this.renderListaAutor = renderListaAutor;
+    }
+
+    /**
+     * @return the listaUsuario
+     */
+    public List<Usuario> getListaUsuario() {
+        return listaUsuario;
+    }
+
+    /**
+     * @param listaUsuario the listaUsuario to set
+     */
+    public void setListaUsuario(List<Usuario> listaUsuario) {
+        this.listaUsuario = listaUsuario;
+    }
+
+    /**
+     * @return the renderListaUsuario
+     */
+    public boolean isRenderListaUsuario() {
+        return renderListaUsuario;
+    }
+
+    /**
+     * @param renderListaUsuario the renderListaUsuario to set
+     */
+    public void setRenderListaUsuario(boolean renderListaUsuario) {
+        this.renderListaUsuario = renderListaUsuario;
     }
     
 }
