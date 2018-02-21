@@ -24,48 +24,55 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class indexView extends View implements Serializable {
-    
+
     @EJB
     LivroBean livroBean;
     @EJB
     UsuarioBean usuarioBean;
     private Livro livro;
+    private Usuario usuario;
     private List<Livro> listaLivro;
     private List<Usuario> listaUsuario;
+    private List<Usuario> listaUsuarioFiltrados;
     private List<Livro> listaLivroFiltrados;
     private String url;
     private boolean renderListaLivro;
     private boolean renderListaUsuario;
     private boolean renderListaAutor;
-    
+
     public void iniciar() {
-        
+
     }
-    
+
     public void message() {
         addMessageInfo("Success", "Data saved");
     }
-    
+
     public void renderizarCadastroLivro() {
         listaLivro = livroBean.findAll();
         renderListaLivro = true;
     }
-    
+
     public void renderizarCadastroAutor() {
         listaLivro = livroBean.findAll();
         renderListaLivro = true;
     }
-    
+
     public void renderizarCadastroUsuario() {
         listaUsuario = usuarioBean.findAll();
-        renderListaLivro = true;
+        renderListaUsuario = true;
     }
-    
+
     public void adicionarLivro() {
         livro = new Livro();
         renderListaLivro = false;
     }
-    
+
+    public void adicionarUsuario() {
+        usuario = new Usuario();
+        renderListaUsuario = false;
+    }
+
     public void confirmarLivro() {
         if (livro.getId() == null) {
             livroBean.salvar(livro);
@@ -76,7 +83,29 @@ public class indexView extends View implements Serializable {
         }
         livro = new Livro();
         renderizarCadastroLivro();
-        
+
+    }
+
+    public void deletarLivro() {
+        livroBean.remove(livro);
+        listaLivro = livroBean.findAll();
+    }
+
+    public void deletarUsuario() {
+        usuarioBean.delete(usuarioBean);
+    }
+
+    public void confirmarUsuario() {
+        if (usuario.getId() == null) {
+            usuarioBean.salvar(usuario);
+            addMessageInfo("Registro salvo com sucesso", "Registro salvo com sucesso");
+        } else {
+            usuarioBean.update(usuario);
+            addMessageInfo("Registro atualizado com sucesso", "Registro atualizado com sucesso");
+        }
+        usuario = new Usuario();
+        renderizarCadastroUsuario();
+
     }
 
     /**
@@ -193,5 +222,33 @@ public class indexView extends View implements Serializable {
     public void setRenderListaUsuario(boolean renderListaUsuario) {
         this.renderListaUsuario = renderListaUsuario;
     }
-    
+
+    /**
+     * @return the listaUsuarioFiltrados
+     */
+    public List<Usuario> getListaUsuarioFiltrados() {
+        return listaUsuarioFiltrados;
+    }
+
+    /**
+     * @param listaUsuarioFiltrados the listaUsuarioFiltrados to set
+     */
+    public void setListaUsuarioFiltrados(List<Usuario> listaUsuarioFiltrados) {
+        this.listaUsuarioFiltrados = listaUsuarioFiltrados;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }

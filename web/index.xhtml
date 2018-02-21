@@ -14,12 +14,14 @@
         <p:menubar>
             <p:submenu label="Cadastros" icon="ui-icon-document">
                 <p:submenu label="Administrativo" icon="ui-icon-contact">
-                    <p:menuitem value="Usuário" url="#" />
+                    <p:menuitem value="Usuário" action="#{indexView.renderizarCadastroUsuario()}" process="@this" update="pagina">
+                        <f:setPropertyActionListener value="../Cadastros/usuario.xhtml" target="#{indexView.url}"/>
+                    </p:menuitem>
                 </p:submenu>
                 <p:menuitem value="Livro" icon="fa fa-book" update="pagina" action="#{indexView.renderizarCadastroLivro()}" process="@this">
                     <f:setPropertyActionListener value="../Cadastros/livro.xhtml" target="#{indexView.url}"/>
                 </p:menuitem>
-                <p:menuitem value="Autor" action="#{indexView.renderizarCadastroAutor()}" process="@this">
+                <p:menuitem value="Autor" url="#">
                     <f:setPropertyActionListener value="../Cadastros/autor.xhtml" target="#{indexView.url}"/>
                 </p:menuitem>
             </p:submenu>

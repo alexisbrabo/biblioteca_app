@@ -20,5 +20,10 @@ public class LivroBean extends Bean {
     public List<Livro> findAll() {
         return em.createQuery("SELECT o FROM Livro o WHERE o.id > 0").getResultList();
     }
+    
+    public void remove(Livro l) {
+        Livro livro = em.merge(l);
+        em.remove(livro);
+    }
 
 }

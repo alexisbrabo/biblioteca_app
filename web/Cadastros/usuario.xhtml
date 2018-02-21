@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:panelGroup id="pnlGeralUsuario">
+        <h:panelGroup id="listaUsuarioPnl" rendered="#{indexView.renderListaUsuario}">
+            <p:dataTable id="listaUsuario" var="usuario" value="#{indexView.listaUsuario}" widgetVar="usuarios" paginator="true" emptyMessage="Sem Registros" 
+                         filteredValue="#{indexView.listaUsuarioFiltrados}" rows="10">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Adicionar" action="#{indexView.adicionarUsuario()}" update=":geral:pnlGeralUsuario"/> 
+
+                        <p:spacer width="5px"/>
+
+                        <h:outputText value="Procure em todos os campos " />
+                        <p:inputText onkeyup="PF('usuarios').filter()" style="width:150px" placeholder="Digite Aqui"/>
+
+                        <p:spacer width="5px"/>
+
+                        <p:commandButton icon="fa fa-file-excel-o" ajax="false"> 
+                            <p:dataExporter type="xls" target="listaUsuario" fileName="usuario"/>
+                        </p:commandButton>
+
+                        <p:commandButton icon="fa fa-file-pdf-o" ajax="false">
+                            <p:dataExporter type="pdf" target="listaUsuario" fileName="usuario"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+
+
+                </f:facet>
+
+                <p:column headerText="Id" filterBy="#{usuario.id}">
+                    <h:outputText value="#{usuario.id}" />
+                </p:column>
+
+                <p:column headerText="Nome" filterBy="#{usuario.nome}">
+                    <h:outputText value="#{usuario.nome}" />
+                </p:column>
+
+                <p:column headerText="Senha" filterBy="#{usuario.senha}">
+                    <h:outputText value="#{usuario.senha}" />
+                </p:column>
+
+
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":geral:pnlGeralUsuario" icon="fa fa-edit" title="Editar">
+                        <f:setPropertyActionListener value="#{usuario}" target="#{indexView.usuario}" />
+                        <f:setPropertyActionListener value="false" target="#{indexView.renderListaUsuario}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":geral:pnlGeralUsuario" icon="fa fa-trash-o" title="Excluir Registro">
+                        <f:setPropertyActionListener value="#{usuario}" target="#{indexView.usuario}" />
+                        <f:setPropertyActionListener value="false" target="#{indexView.renderListaUsuario}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+
+        <h:panelGroup id="usuario" rendered="#{!indexView.renderListaUsuario}">
+            <p:panelGrid columns="2" styleClass="ui-noborder">
+                <h:outputText value="Nome:"/>
+                <p:inputText value="#{indexView.usuario.nome}" required="true" label="Nome"/>
+                <h:outputText value="Senha:"/>
+                <p:inputText value="#{indexView.usuario.senha}" required="true" label="Senha"/>
+                <br/>
+                <h:panelGroup>
+
+                    <p:commandButton value="Ok" action="#{indexView.confirmarUsuario()}" update="messages, :geral:pnlGeralUsuario"/>
+                    <p:commandButton value="Cancelar" process="@this" update=":geral:pnlGeralUsuario">
+                        <f:setPropertyActionListener value="true" target="#{indexView.renderListaUsuario}"/>
+                    </p:commandButton>
+                </h:panelGroup>
+
+            </p:panelGrid>
+        </h:panelGroup>
+    </h:panelGroup>
+</html>

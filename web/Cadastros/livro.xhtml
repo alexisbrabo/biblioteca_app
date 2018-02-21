@@ -55,13 +55,22 @@
                     </p:commandButton>
                 </p:column>
                 <p:column style="width:32px;text-align: center">
-                    <p:commandButton update=":geral:pnlGeralLivro" icon="fa fa-trash-o" title="Excluir Registro">
+                    <p:commandButton icon="fa fa-trash-o" title="Excluir Registro" oncomplete="deletarLivroOnComplete()">
                         <f:setPropertyActionListener value="#{livro}" target="#{indexView.livro}" />
-                        <f:setPropertyActionListener value="false" target="#{indexView.renderListaLivro}" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
         </h:panelGroup>
+
+        <script>
+            function deletarLivroOnComplete() {
+                resp = confirm('Tem certeza que deseja deletar este registro?');
+                if (resp) {
+                    deletarLivro();
+                }
+            }
+        </script>
+        <p:remoteCommand action="#{indexView.deletarLivro()}" name="deletarLivro" update=":geral:pnlGeralLivro, pagina"  process="@this"/>
 
         <h:panelGroup id="livro" rendered="#{!indexView.renderListaLivro}">
             <p:panelGrid columns="2" styleClass="ui-noborder">
