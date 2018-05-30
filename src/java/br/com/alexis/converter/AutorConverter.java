@@ -17,7 +17,7 @@ import org.jboss.weld.context.ejb.Ejb;
  *
  * @author alexisbrabo
  */
-@FacesConverter(forClass = Autor.class)
+@FacesConverter(forClass = Autor.class, value = "autorConverter")
 public class AutorConverter implements Converter {
 
     @Ejb

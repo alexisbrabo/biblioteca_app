@@ -85,7 +85,7 @@
                                 scrollHeight="200" size="60"
                                 completeMethod="#{autorView.completeAutor}"
                                 var="item" itemLabel="#{item.nome}"
-                                itemValue="#{item}" required="true">
+                                itemValue="#{item}" required="true" converter="autorConverter">
 
                     <p:column headerText="Código">
                         <h:outputText value="#{item.id}"/>
