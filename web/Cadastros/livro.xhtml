@@ -80,6 +80,21 @@
                 <p:inputText value="#{indexView.livro.numPaginas}" required="true" label="Número de Páginas"/>
                 <h:outputText value="Editora:"/>
                 <p:inputText value="#{indexView.livro.editora}" required="true" label="Editora"/>
+                <h:outputText value="Autor:"/>
+                <p:autoComplete value="#{indexView.livro.autor}"
+                                scrollHeight="200" size="60"
+                                completeMethod="#{autorView.completeAutor}"
+                                var="item" itemLabel="#{item.nome}"
+                                itemValue="#{item}" required="true">
+
+                    <p:column headerText="Código">
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>
+                </p:autoComplete>
 
                 <br/>
                 <h:panelGroup>

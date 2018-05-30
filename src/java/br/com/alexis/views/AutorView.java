@@ -60,6 +60,11 @@ public class AutorView extends View implements Serializable {
 
     }
 
+    public List<Autor> completeAutor(String texto) {
+        texto = texto.trim();
+        return autorBean.findAutorByNome(texto);
+    }
+
     public void deletarAutor() {
         autorBean.delete(autor);
         listaAutor = autorBean.findAll();

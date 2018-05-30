@@ -21,4 +21,12 @@ public class AutorBean extends Bean {
         return em.createQuery("SELECT o FROM Autor o WHERE o.id > 0").getResultList();
     }
 
+    public List<Autor> findAutorByNome(String texto) {
+        return em.createQuery("SELECT o FROM Autor o WHERE o.nome = '%" + texto + "%'").getResultList();
+    }
+
+    public List<Autor> findAutorById(Integer id) {
+        return em.createQuery("SELECT o FROM Autor o WHERE o.id = '" + id + "'").getResultList();
+    }
+
 }
