@@ -87,7 +87,7 @@ public class indexView extends View implements Serializable {
     }
 
     public void deletarLivro() {
-        livroBean.remove(livro);
+        livroBean.delete(livro);
         listaLivro = livroBean.findAll();
     }
 

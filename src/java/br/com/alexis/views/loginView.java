@@ -2,14 +2,10 @@ package br.com.alexis.views;
 
 import br.com.alexis.beans.UsuarioBean;
 import br.com.alexis.models.Usuario;
-import br.com.alexis.outros.Uteis;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *

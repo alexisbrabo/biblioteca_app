@@ -12,7 +12,6 @@ import javax.persistence.PersistenceContext;
  *
  * @author alexi
  */
-
 public class Bean {
 
     @PersistenceContext
@@ -27,6 +26,9 @@ public class Bean {
     }
 
     public void delete(Object o) {
+        if (!em.contains(o)) {
+            o = em.merge(o);
+        }
         em.remove(o);
     }
 

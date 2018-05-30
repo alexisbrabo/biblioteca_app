@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Biblioteca App</title>
@@ -47,10 +48,11 @@
             <p:growl id="messages"/>
             <p:layout fullPage="true">
                 <p:layoutUnit position="center">
+                    
                     <ui:insert name="center">
 
                     </ui:insert>
-                    
+
                     <ui:insert name="content">
                         <h:panelGroup id="pagina">
                             <h:panelGroup rendered="#{indexView.url != null}">

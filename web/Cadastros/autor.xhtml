@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:panelGroup id="pnlGeralAutor">
+        <h:panelGroup id="listaAutorPnl" rendered="#{autorView.renderListaAutor}">
+            <p:dataTable id="listaAutor" var="autor" value="#{autorView.listaAutor}" widgetVar="autores" paginator="true" emptyMessage="Sem Registros" 
+                         filteredValue="#{autorView.listaAutoresFiltrados}" rows="10">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:commandButton value="Adicionar" action="#{autorView.adicionarAutor()}" update=":geral:pnlGeralAutor"/> 
+
+                        <p:spacer width="5px"/>
+
+                        <h:outputText value="Procure em todos os campos " />
+                        <p:inputText id="globalFilter" onkeyup="PF('autores').filter()" style="width:150px" placeholder="Digite Aqui"/>
+
+                        <p:spacer width="5px"/>
+
+                        <p:commandButton icon="fa fa-file-excel-o" ajax="false"> 
+                            <p:dataExporter type="xls" target="listaAutor" fileName="autor"/>
+                        </p:commandButton>
+
+                        <p:commandButton icon="fa fa-file-pdf-o" ajax="false">
+                            <p:dataExporter type="pdf" target="listaAutor" fileName="autor"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+
+
+                </f:facet>
+
+                <p:column headerText="Id" filterBy="#{autor.id}">
+                    <h:outputText value="#{autor.id}" />
+                </p:column>
+
+                <p:column headerText="Nome" filterBy="#{autor.nome}">
+                    <h:outputText value="#{autor.nome}" />
+                </p:column>
+
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton update=":geral:pnlGeralAutor" icon="fa fa-edit" title="Editar">
+                        <f:setPropertyActionListener value="#{autor}" target="#{autorView.autor}" />
+                        <f:setPropertyActionListener value="false" target="#{autorView.renderListaAutor}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton icon="fa fa-trash-o" title="Excluir Registro" oncomplete="deletarAutorOnComplete()">
+                        <f:setPropertyActionListener value="#{autor}" target="#{autorView.autor}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+
+        <script>
+            function deletarAutorOnComplete() {
+                resp = confirm('Tem certeza que deseja deletar este registro?');
+                if (resp) {
+                    deletarAutor();
+                }
+            }
+        </script>
+        <p:remoteCommand action="#{autorView.deletarAutor()}" name="deletarAutor" update=":geral:pnlGeralAutor, pagina"  process="@this"/>
+
+        <h:panelGroup id="autor" rendered="#{!autorView.renderListaAutor}">
+            <p:panelGrid columns="2" styleClass="ui-noborder">
+                <h:outputText value="Nome do Autor:"/>
+                <p:inputText value="#{autorView.autor.nome}" required="true" label="Nome"/>
+
+                <br/>
+                <h:panelGroup>
+
+                    <p:commandButton value="Ok" action="#{autorView.confirmarAutor()}" update="messages, :geral:pnlGeralAutor"/>
+                    <p:commandButton value="Cancelar" process="@this" update=":geral:pnlGeralAutor">
+                        <f:setPropertyActionListener value="true" target="#{autorView.renderListaAutor}"/>
+                    </p:commandButton>
+                </h:panelGroup>
+
+            </p:panelGrid>
+        </h:panelGroup>
+    </h:panelGroup>
+</html>

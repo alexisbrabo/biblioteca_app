@@ -21,7 +21,7 @@
                 <p:menuitem value="Livro" icon="fa fa-book" update="pagina" action="#{indexView.renderizarCadastroLivro()}" process="@this">
                     <f:setPropertyActionListener value="../Cadastros/livro.xhtml" target="#{indexView.url}"/>
                 </p:menuitem>
-                <p:menuitem value="Autor" url="#">
+                <p:menuitem value="Autor" icon="fa fa-book" update="pagina" action="#{autorView.renderizarCadastroAutor()}" process="@this">
                     <f:setPropertyActionListener value="../Cadastros/autor.xhtml" target="#{indexView.url}"/>
                 </p:menuitem>
             </p:submenu>
@@ -33,7 +33,6 @@
                 <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
             </f:facet>
         </p:menubar>
-
 
     </ui:define>
 

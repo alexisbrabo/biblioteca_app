@@ -5,7 +5,7 @@
  */
 package br.com.alexis.beans;
 
-import br.com.alexis.models.Livro;
+import br.com.alexis.models.Autor;
 import br.com.alexis.padrao.Bean;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,10 +15,10 @@ import javax.ejb.Stateless;
  * @author alexi
  */
 @Stateless
-public class LivroBean extends Bean {
+public class AutorBean extends Bean {
 
-    public List<Livro> findAll() {
-        return em.createQuery("SELECT o FROM Livro o WHERE o.id > 0").getResultList();
+    public List<Autor> findAll() {
+        return em.createQuery("SELECT o FROM Autor o WHERE o.id > 0").getResultList();
     }
 
 }
