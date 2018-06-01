@@ -31,6 +31,11 @@ public class Bean {
         }
         em.remove(o);
     }
+    
+    public Object findByPrimaryKey(Class classe, Object obj) {
+        Object o = em.find(classe, obj);
+        return o;
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

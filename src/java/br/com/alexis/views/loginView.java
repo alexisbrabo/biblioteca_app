@@ -2,6 +2,7 @@ package br.com.alexis.views;
 
 import br.com.alexis.beans.UsuarioBean;
 import br.com.alexis.models.Usuario;
+import br.com.alexis.padrao.View;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class loginView implements Serializable {
+public class loginView extends View implements Serializable {
 
     @EJB
     private UsuarioBean usuarioBean;
@@ -28,6 +29,7 @@ public class loginView implements Serializable {
             return "index";
         }
         
+        addMessageError("Erro", "Erro");
         return "";
     }
 

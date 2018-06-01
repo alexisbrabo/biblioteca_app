@@ -22,7 +22,8 @@ public class AutorBean extends Bean {
     }
 
     public List<Autor> findAutorByNome(String texto) {
-        return em.createQuery("SELECT o FROM Autor o WHERE o.nome = '%" + texto + "%'").getResultList();
+        List<Autor> lista = em.createQuery("SELECT o FROM Autor o WHERE o.nome like '%" + texto + "%'").getResultList();
+        return lista;
     }
 
     public List<Autor> findAutorById(Integer id) {

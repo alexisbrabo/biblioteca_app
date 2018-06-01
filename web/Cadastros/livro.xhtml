@@ -77,15 +77,15 @@
                 <h:outputText value="Nome:"/>
                 <p:inputText value="#{indexView.livro.nome}" required="true" label="Nome"/>
                 <h:outputText value="Páginas:"/>
-                <p:inputText value="#{indexView.livro.numPaginas}" required="true" label="Número de Páginas"/>
+                <p:inputText value="#{indexView.livro.numPaginas}" required="true" type="number" label="Número de Páginas"/>
                 <h:outputText value="Editora:"/>
                 <p:inputText value="#{indexView.livro.editora}" required="true" label="Editora"/>
                 <h:outputText value="Autor:"/>
                 <p:autoComplete value="#{indexView.livro.autor}"
-                                scrollHeight="200" size="60"
+                                scrollHeight="200" label="Autor"
                                 completeMethod="#{autorView.completeAutor}"
                                 var="item" itemLabel="#{item.nome}"
-                                itemValue="#{item}" required="true" converter="autorConverter">
+                                itemValue="#{item}" required="true">
 
                     <p:column headerText="Código">
                         <h:outputText value="#{item.id}"/>
