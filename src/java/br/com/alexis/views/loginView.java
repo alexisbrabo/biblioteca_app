@@ -7,6 +7,8 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,12 +27,22 @@ public class loginView extends View implements Serializable {
 
         Usuario usuario = usuarioBean.getUsuarioLogin(getUser(), getSenha());
         if (usuario != null) {
-           
-            return "index";
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            if (session != null) {
+                session.setAttribute("usuario", usuario);
+            }
+            return "/index?faces-redirect=true";
         }
-        
+
         addMessageError("Erro", "Erro");
-        return "";
+        return null;
+    }
+
+    public String logOff() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.invalidate();
+        return "/login?faces-redirect=true";
     }
 
     /**

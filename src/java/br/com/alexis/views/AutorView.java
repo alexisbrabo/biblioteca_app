@@ -7,6 +7,7 @@ package br.com.alexis.views;
 
 import br.com.alexis.beans.AutorBean;
 import br.com.alexis.models.Autor;
+import br.com.alexis.padrao.Relatorio;
 import br.com.alexis.padrao.View;
 import java.io.Serializable;
 import java.util.List;
@@ -68,6 +69,11 @@ public class AutorView extends View implements Serializable {
     public void deletarAutor() {
         autorBean.delete(autor);
         listaAutor = autorBean.findAll();
+    }
+    
+    public void gerarRelatorio(){
+        Relatorio r = new Relatorio();
+        r.getRelatorio(listaAutor);
     }
 
     /**

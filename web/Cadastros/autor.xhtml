@@ -25,9 +25,7 @@
                             <p:dataExporter type="xls" target="listaAutor" fileName="autor"/>
                         </p:commandButton>
 
-                        <p:commandButton icon="fa fa-file-pdf-o" ajax="false">
-                            <p:dataExporter type="pdf" target="listaAutor" fileName="autor"/>
-                        </p:commandButton>
+                        <p:commandButton value="Relatório" action="#{autorView.gerarRelatorio}" icon="fa fa-file-pdf-o" ajax="false" onclick="this.form.target = '_blank'"/>
                     </p:outputPanel>
 
 
