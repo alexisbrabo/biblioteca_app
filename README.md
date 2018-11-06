@@ -1,2 +1,2 @@
 # Biblioteca_App
-Aplicativo Cruud Simples em Java Para Bibliotecas
+Aplicativo Crud em Java Para Bibliotecas utilizando Java EE, JSF e Primefaces.
