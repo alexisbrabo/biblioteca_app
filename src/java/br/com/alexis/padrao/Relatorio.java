@@ -36,7 +36,7 @@ public class Relatorio {
 
     }
 
-    public void getRelatorio(List<Autor> lista) {
+    public void getRelatorio(List<?> lista) {
         inputStream = this.getClass().getResourceAsStream("/br/com/alexis/reports/autores.jasper");
         Map<String, Object> params = new HashMap<String, Object>();
         arrayOutputStream = new ByteArrayOutputStream();
